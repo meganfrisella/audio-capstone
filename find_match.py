@@ -26,7 +26,6 @@ def match(fingerprints, base):
     matches = []
 
     database = base
-    #print(list(database.keys())[0], database[list(database.keys())[0]])
 
     for fp in fingerprints:
         if fp[:3] in database:
