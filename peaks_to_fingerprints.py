@@ -6,8 +6,14 @@ def recording_peaks_to_fingerprints(peaks):
     """
     Compiles a list of fingerprints from a list of peaks for any type of audio data.
 
-    :param peaks: a list of tuples that contain peaks in the form (freq, time)
-    :return: a list of tuples that contain fingerprints in the form (f_n, f_n+i, t_n+i - t_n)
+    Parameters:
+    -----------
+    peaks: List[Tuple[int, int]]
+    List of tuples that contain peaks in the form (freq, time)
+    
+    Returns:
+    --------
+    List[Tuple[int, int, int]]: List of tuples that contain fingerprints in the form (f_n, f_n+i, t_n+i - t_n)
     """
 
     fan_out = 15
@@ -24,6 +30,20 @@ def recording_peaks_to_fingerprints(peaks):
 
 
 def create_database():
+    """
+    Creates a database of fingerprints that map to a song ID and time interval.
+    
+    Parameters:
+    -----------
+    None
+    
+    Returns:
+    --------
+    Dict[Tuple[int, int, int]:List[Tuple[int, int]]]
+    Dictionary of fingerprints that map to a list of tuples (song_ID, dt)
+    
+    """
+    
     database = {}
     data = dict_data.import_dictionaries('int_to_pathstring')
     for song_ID in range(2):
