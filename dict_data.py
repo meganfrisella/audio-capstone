@@ -1,5 +1,20 @@
 import pickle
 
+def import_test():
+    """import length-9 tuple of 9-second test samples
+
+    Parameters:
+    -----------
+    None
+
+    Returns:
+    --------
+    length-9 tuple of 9-second test samples"""
+    f = open("test.p", "rb")
+    test_tuple = pickle.load(f)
+    f.close()
+    return test_tuple
+
 def import_dictionaries(string):
     """imports dictionaries
     
