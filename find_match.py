@@ -10,8 +10,17 @@ def match(fingerprints, base):
     """
     Compares the recorded fingerprints to fingerprints from songs stored in the database to identify the song.
 
-    :param fingerprints: a list of tuples that store the fingerprints from the recorded audio file
-    :return: a string indicating the matched song in the form '(song title) by (artist)'
+    Parameters:
+    -----------
+    fingerprints: List[Tuple[int, int, int]]
+    List of fingerprints (freq_0, freq_1, dt) that store the fingerprints from the recorded audio file
+    
+    base: Dict[Tuple[int, int, int]:List[string, int]]
+    Dictionary of fingerprints (freq_0, freq_1, dt) that map to a list of song names and time intervals.
+    
+    Returns:
+    --------
+    [string]: Title of the matched song in the form "(song title) by (artist)"
     """
     songs = {}
 
