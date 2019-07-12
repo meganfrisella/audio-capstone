@@ -34,8 +34,8 @@ def create_database():
         fingerprints = peaks_to_fingerprints.recording_peaks_to_fingerprints(peaks)
 
         for fp in fingerprints:
-            if fp not in database:
-                database[fp] = [song_ID]
+            if fp[0:2] not in database:
+                database[fp[0:2]] = [(song_ID,fp[3])]
             else:
-                database[fp].append(song_ID)
+                database[fp[0:2]].append((song_ID, fp[3]))
     return database 
