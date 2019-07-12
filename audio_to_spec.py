@@ -59,9 +59,9 @@ def sample_to_spectrogram(sample):
     
     Returns:
     --------
-    [np.array of shape(2049,  21.333333333333332*(length of the sample in seconds)   )]
+    [mlab.specgram object]
     
-        [Returns np.log(np.clip(S)) from mlab.specgram function]
+        [Returns S, freqs, times of mlab.specgram object (see ex)]
         
     Ex: 
     
