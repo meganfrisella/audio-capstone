@@ -67,6 +67,7 @@ def sample_to_spectrogram(sample):
     
     S, freqs, times = mlab.specgram(believe_sample, NFFT=4096, Fs=44100,
                                   noverlap=4096 // 2)"""
-    
-    S, freqs, times = mlab.specgram(sample, NFFT=4096, Fs=44100,noverlap=4096 // 2)
-    return np.log(np.clip(S,a_min=10**-20,a_max=None))
+
+    return mlab.specgram(sample, NFFT=4096, Fs=44100,noverlap=4096 // 2)
+    #S, freqs, times = mlab.specgram(sample, NFFT=4096, Fs=44100,noverlap=4096 // 2)
+    #return np.log(np.clip(S,a_min=10**-20,a_max=None))
