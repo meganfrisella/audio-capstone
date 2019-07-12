@@ -17,9 +17,10 @@ def recording_peaks_to_fingerprints(peaks):
         if len(peaks) - idx <= fan_out:
             break
         for i in range(1, fan_out+1):
-            fingerprints.append((peak[0], peaks[idx+i][0], peaks[idx+i][1]-peak[1]))
+            fingerprints.append((peak[0], peaks[idx+i][0], peaks[idx+i][1]-peak[1],peak[1]))
 
     return fingerprints
+
 
 
 def create_database():
