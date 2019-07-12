@@ -1,3 +1,12 @@
+import numpy as np
+import matplotlib.mlab as mlab
+import librosa
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython.display import Audio
+from pathlib import Path
+from microphone import record_audio
+
 def mp3_to_sample(path):
     """converts an mp3 file to 16-bit @44.1kHz samples
     
