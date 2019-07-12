@@ -15,10 +15,10 @@ def match(fingerprints, base):
     -----------
     fingerprints: List[Tuple[int, int, int]]
     List of fingerprints (freq_0, freq_1, dt) that store the fingerprints from the recorded audio file
-    
+
     base: Dict[Tuple[int, int, int]:List[string, int]]
     Dictionary of fingerprints (freq_0, freq_1, dt) that map to a list of song names and time intervals.
-    
+
     Returns:
     --------
     [string]: Title of the matched song in the form "(song title) by (artist)"
@@ -32,4 +32,9 @@ def match(fingerprints, base):
         if fp[:3] in database:
             for idx, val in enumerate(database[fp[0:3]]):
                 matches.append((val[0], val[1]-fp[3]))
-    return song_IDs[c(matches).most_common()[0][0][0]]
+
+    max = c(matches).most_common()[0][1]
+    if max > 100:
+        return song_IDs[c(matches).most_common()[0][0][0]]
+    else:
+        'Could not determine song.'
