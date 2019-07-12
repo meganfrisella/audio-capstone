@@ -136,7 +136,7 @@ def SpecToPeaks(Specto):
     cutoff_percent = 0.77
     amp_min = np.sort(data)[int(cutoff_percent*data.size)]
     #amp_min = np.exp(amp_min)
-    print(amp_min, max(data))
+    #print(amp_min, max(data))
     #print(amp_min)
     return sorted(local_peaks(S, amp_min, fan_out), key = lambda peak: peak[1])
 
