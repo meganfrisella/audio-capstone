@@ -9,7 +9,7 @@ from microphone import record_audio
 import pickle
 
 import dict_data
-import audio_sampling
+
 import audio_to_spec
 import peaks_to_fingerprints
 import find_match
