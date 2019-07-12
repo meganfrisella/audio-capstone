@@ -1,5 +1,23 @@
 import pickle
 
+def import_database():
+    """Imports databse of song footprints
+    
+    parameters:
+    -----------
+    none
+    
+    returns:
+    --------
+    dictionary of database
+    
+     """
+    f = open("database.p", "rb")
+    database = pickle.load(f)
+    f.close()
+    return database
+
+
 def import_test():
     """import length-9 tuple of 9-second test samples
 
