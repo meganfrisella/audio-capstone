@@ -17,7 +17,7 @@ import SpectogramToFingerprints
 database = dict_data.import_database()
 
 def run(length):
-    """Runs everything
+    """Runs everything, as long as length is over 3 seconds
     
     parameters:
     -----------
@@ -29,6 +29,9 @@ def run(length):
         [song title and artist]
     """
     
+    if length <= 3:
+        return "Sorry, your sample length is too low! Please enter a value greater than 3, thanks!"
+
     sample = audio_to_spec.mic_to_sample(length)
     
     
