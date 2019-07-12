@@ -1,4 +1,18 @@
 from numba import njit
+import numpy as np
+import matplotlib.mlab as mlab
+import librosa
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython.display import Audio
+from pathlib import Path
+from microphone import record_audio
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
+
+from scipy.ndimage.filters import maximum_filter
+from scipy.ndimage.morphology import generate_binary_structure, binary_erosion
+from scipy.ndimage.morphology import iterate_structure
 #Marker of start code from Ryan
 @njit()
 def _peaks(spec, rows, cols, amp_min):
@@ -86,15 +100,30 @@ def local_peaks(log_spectrogram, amp_min, p_nn):
     return detected_peaks
 # Marker of end code from Ryan
 
-def SpecToPeaks(specto):
+def SpecToPeaks(S):
     """
-    :param specto: np.array[int, int]
+    :param S: np.array[int, int]
         floating point matrix (spectogram -- dimensions: frequency X time)
     :return: List[Tuple[int, int]]
         Time and frequency index-values of the local peaks in spectrogram.
         Sorted by ascending frequency and then time.
     """
-    return local_peaks(specto,)
 
-def SpecToFingerprints():
-    """"""
+    data = S.ravel()
+    #should already be logged
+    N = data.size
+    hist, bin_edges = np.histogram(data, bins=int(N/2), density=True)
+    bin_size = bin_edges[1]-bin_edges[0]
+
+    #Ryan's suggested value: 0.77
+    cutoff_percent = 0.77;
+    #Ryan's suggested value: 15
+    fan_out = 15;
+    cumulative_distr = np.cumsum(hist)*bin_size
+    index = np.searchsorted(cumulative_distr, cutoff_percent)
+    amp_bin = times[index]
+    amp_min = np.exp(amp_bin)
+
+    return local_peaks(hist, amp_min, fan_out)
+
+#def PeaksToFingerPrints():
