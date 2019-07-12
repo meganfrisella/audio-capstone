@@ -109,23 +109,35 @@ def SpecToPeaks(Specto):
         Sorted by ascending frequency and then time.
     """
 
-    S, freqs, times = Specto    
+    S, freqs, times = Specto
     S = np.log(np.clip(S,a_min=10**-20,a_max=None))
-    data = S.ravel()
+    data = S.ravel()# -- MAY NEED TO CHANGE BACK
+    #data = S
     #should already be logged
     N = data.size
-    hist, bin_edges = np.histogram(data, bins=int(N/2), density=True)
+    cutoff_percent = 0.77
+
+    """hist, bin_edges = np.histogram(data, bins=int(N/2), density=True)
     bin_size = bin_edges[1]-bin_edges[0]
 
     #Ryan's suggested value: 0.77
-    cutoff_percent = 0.77;
     #Ryan's suggested value: 15
-    fan_out = 15;
     cumulative_distr = np.cumsum(hist)*bin_size
-    index = np.searchsorted(cumulative_distr, cutoff_percent)
-    amp_bin = times[index]
-    amp_min = np.exp(amp_bin)
+    print(times)
+    print(cumulative_distr)
+"""
 
-    return local_peaks(hist, amp_min, fan_out)
+    #print(data.shape)
+    #print(2049*47)
+    #print(times.shape)
+    #print(freqs.shape)
+    #print(S.shape)
+    fan_out = 15
+    cutoff_percent = 0.77
+    amp_min = np.sort(data)[int(cutoff_percent*data.size)]
+    #amp_min = np.exp(amp_min)
+    #print(amp_min, max(data))
+    #print(amp_min)
+    return sorted(local_peaks(S, amp_min, fan_out), key = lambda peak: peak[1])
 
 #def PeaksToFingerPrints():
