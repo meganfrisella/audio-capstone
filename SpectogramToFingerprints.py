@@ -100,7 +100,7 @@ def local_peaks(log_spectrogram, amp_min, p_nn):
     return detected_peaks
 # Marker of end code from Ryan
 
-def SpecToPeaks(S):
+def SpecToPeaks(Specto):
     """
     :param S: np.array[int, int]
         floating point matrix (spectogram -- dimensions: frequency X time)
@@ -109,6 +109,8 @@ def SpecToPeaks(S):
         Sorted by ascending frequency and then time.
     """
 
+    S, freqs, times = Specto    
+    S = np.log(np.clip(S,a_min=10**-20,a_max=None))
     data = S.ravel()
     #should already be logged
     N = data.size
