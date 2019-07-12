@@ -1,5 +1,6 @@
 import dict_data as data
 import pickle
+from collections import Counter as c
 
 # STILL MUST IMPORT DATA FROM DATABASE #
 
@@ -13,20 +14,14 @@ def match(fingerprints, base):
     :param fingerprints: a list of tuples that store the fingerprints from the recorded audio file
     :return: a string indicating the matched song in the form '(song title) by (artist)'
     """
-    songs = {}
+    matches = []
 
     database = base
-
-    for song in song_IDs.values():
-        songs[song] = 0
+    #print(list(database.keys())[0], database[list(database.keys())[0]])
 
     for fp in fingerprints:
-        if fp in database:
-            for i in range(len(database[fp])):
-                songs[database[fp][i]] += 1
-
-    song = max(zip(songs.values(), songs.keys()))
-
-    print(songs)
-
-    return song[1]
+        if fp[:3] in database:
+            for idx, val in enumerate(database[fp[0:3]]):
+                matches.append((val[0], fp[3]-val[1]))
+    print(matches)
+    print(c(matches))
