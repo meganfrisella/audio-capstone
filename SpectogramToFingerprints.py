@@ -126,6 +126,7 @@ def SpecToPeaks(Specto):
     print(times)
     print(cumulative_distr)
 """
+
     #print(data.shape)
     #print(2049*47)
     #print(times.shape)
@@ -136,6 +137,6 @@ def SpecToPeaks(Specto):
     amp_min = np.sort(data)[int(cutoff_percent*data.size)]
     amp_min = np.exp(amp_min)
     #print(amp_min)
-    return local_peaks(S, amp_min, fan_out)
+    return sorted(local_peaks(S, amp_min, fan_out), key = lambda peak: peak[1])
 
 #def PeaksToFingerPrints():
