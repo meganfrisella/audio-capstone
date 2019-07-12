@@ -34,7 +34,8 @@ def match(fingerprints, base):
                 matches.append((val[0], val[1]-fp[3]))
 
     max = c(matches).most_common()[0][1]
-    if max > 100:
+    print(max)
+    if max > 20:
         return song_IDs[c(matches).most_common()[0][0][0]]
     else:
         return 'Sorry, we could not find your song :('
