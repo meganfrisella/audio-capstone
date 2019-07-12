@@ -42,7 +42,7 @@ def _peaks(spec, rows, cols, amp_min):
             if spec[r, c] < spec[r + dr, c + dc]:
                 break
         else:
-            peaks.append((c, r))
+            peaks.append((r, c))
     return peaks
 
 

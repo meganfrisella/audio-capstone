@@ -31,6 +31,5 @@ def match(fingerprints, base):
     for fp in fingerprints:
         if fp[:3] in database:
             for idx, val in enumerate(database[fp[0:3]]):
-                matches.append((val[0], fp[3]-val[1]))
-    print(matches)
-    print(c(matches))
+                matches.append((val[0], val[1]-fp[3]))
+    return song_IDs[c(matches).most_common()[0][0][0]]

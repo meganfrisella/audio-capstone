@@ -1,5 +1,9 @@
 import dict_data
 import audio_to_spec
+import pickle
+import SpectogramToFingerprints
+import find_match
+import peaks_to_fingerprints
 
 
 def recording_peaks_to_fingerprints(peaks):
@@ -24,7 +28,6 @@ def recording_peaks_to_fingerprints(peaks):
             break
         for i in range(1, fan_out+1):
             fingerprints.append((peak[0], peaks[idx+i][0], peaks[idx+i][1]-peak[1],peak[1]))
-
     return fingerprints
 
 
@@ -46,9 +49,8 @@ def create_database():
     
     database = {}
     data = dict_data.import_dictionaries('int_to_pathstring')
-    for song_ID in range(2):
-        sample = audio_to_spec.mp3_to_sample(
-            '/Users/MeganFrisella/GitHub/audio-capstone/Audio/' + data[song_ID] + '.mp3')
+    for song_ID in range(20):
+        sample = audio_to_spec.mp3_to_sample('/Users/MeganFrisella/GitHub/audio-capstone/Audio/' + data[song_ID] + '.mp3')
         S, f, t = audio_to_spec.sample_to_spectrogram(sample)
         peaks = SpectogramToFingerprints.SpecToPeaks((S, f, t))
         fingerprints = peaks_to_fingerprints.recording_peaks_to_fingerprints(peaks)
@@ -58,4 +60,4 @@ def create_database():
                 database[fp[0:3]] = [(song_ID,fp[3])]
             else:
                 database[fp[0:3]].append((song_ID, fp[3]))
-    return database 
+    return database
